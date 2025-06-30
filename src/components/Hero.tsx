@@ -12,7 +12,7 @@ const Hero = () => {
       </h1>
       <div className="flex items-center justify-center space-x-4 gap-4 mt-8">
         <img src="/Group 8.png" alt="..." />
-        <div className="h-[2rem] w-[6rem] px-2 py-1.5 bg-blue-100 text-blue-700 text-[14px] rounded-[0.75rem] flex items-center justify-center">
+        <div className="h-[2rem] w-[6rem] px-2 py-1.5 bg-blue-100 text-blue-800 text-[14px] rounded-[0.75rem] flex items-center justify-center">
           +40 more
         </div>
       </div>

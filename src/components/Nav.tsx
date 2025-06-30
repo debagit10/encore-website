@@ -22,11 +22,6 @@ const Nav = () => {
             </li>
             <li>
               <a href="#" className="text-gray-700 hover:text-blue-700">
-                FAQs
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-700 hover:text-blue-700">
                 Contact Us
               </a>
             </li>

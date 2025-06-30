@@ -3,7 +3,7 @@
 .container {
   margin-left: auto;
   margin-right: auto;
-  max-width: 80rem;
+  max-width: 100rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }
@@ -20,4 +20,9 @@
     padding-left: 2rem;
     padding-right: 2rem;
   }
+}
+
+@theme {
+  --font-satoshi: "Satoshi", sans-serif;
+  --font-display: "Source Sans 3", sans-serif;
 }
