@@ -21,8 +21,3 @@
     padding-right: 2rem;
   }
 }
-
-@theme {
-  --font-satoshi: "Satoshi", sans-serif;
-  --font-display: "Source Sans 3", sans-serif;
-}
