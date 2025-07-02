@@ -1,10 +1,11 @@
-import { useState } from "react";
-import Uno from "./components/Uno";
+// import Uno from "./components/Uno";
+import Dos from "./components/Dos";
 
 const App = () => {
   return (
     <div className="container">
-      <Uno />
+      {/* <Uno /> */}
+      <Dos />
     </div>
   );
 };
