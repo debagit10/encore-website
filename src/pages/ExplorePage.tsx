@@ -3,6 +3,7 @@ import { InputAdornment, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Rating from "../utils/Rating";
+import { useState } from "react";
 
 const tools = [
   {
@@ -10,77 +11,60 @@ const tools = [
     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
     logo: "/logo.png",
     rating: 4,
+    category: "Education",
   },
   {
-    name: "DeepSeek",
+    name: "ContentBot",
     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
     logo: "/logo.png",
     rating: 4,
+    category: "Content Creation",
   },
   {
-    name: "DeepSeek",
+    name: "AI Editor Pro",
     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
     logo: "/logo.png",
     rating: 4,
+    category: "Video Editing",
   },
   {
-    name: "DeepSeek",
+    name: "Talky AI",
     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
     logo: "/logo.png",
     rating: 4,
+    category: "Chat Box & A.I Assistant",
   },
   {
-    name: "DeepSeek",
+    name: "WriteSmart",
     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
     logo: "/logo.png",
     rating: 4,
+    category: "Writing",
   },
   {
-    name: "DeepSeek",
+    name: "ImageForge",
     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
     logo: "/logo.png",
     rating: 4,
+    category: "Image Generation",
   },
-  {
-    name: "DeepSeek",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-  },
-  {
-    name: "DeepSeek",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-  },
-  {
-    name: "DeepSeek",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-  },
-  {
-    name: "DeepSeek",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-  },
-  {
-    name: "DeepSeek",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-  },
-  {
-    name: "DeepSeek",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-  },
+];
+
+const tabs = [
+  { name: "All" },
+  { name: "Education" },
+  { name: "Content Creation" },
+  { name: "Video Editing" },
+  { name: "Chat Box & A.I Assistant" },
+  { name: "Writing" },
+  { name: "Image Generation" },
 ];
 
 const ExplorePage = () => {
   const navigate = useNavigate();
+
+  const [activeTab, setActiveTab] = useState("All");
+
   return (
     <div>
       <div>
@@ -180,53 +164,86 @@ const ExplorePage = () => {
         />
       </div>
 
+      {/* Tabs */}
+      <div className="mt-[3rem] px-4 overflow-x-auto scrollbar-hide">
+        <ul className="flex gap-3 sm:gap-5 md:gap-6 lg:gap-[30px] min-w-max md:justify-center">
+          {tabs.map((tab) => (
+            <li
+              key={tab.name}
+              className={`py-2 px-4 whitespace-nowrap cursor-pointer rounded-[72px] transition-all duration-200 ${
+                activeTab === tab.name ? "bg-[#E7F3FD]" : "bg-transparent"
+              }`}
+              onClick={() => setActiveTab(tab.name)}
+            >
+              <Typography
+                fontWeight={700}
+                sx={{
+                  fontSize: {
+                    xs: 13,
+                    sm: 15,
+                    md: 17,
+                    lg: 18,
+                  },
+                  color: activeTab === tab.name ? "#0167C4" : "#00000A",
+                }}
+              >
+                {tab.name}
+              </Typography>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       {/* Tool Cards */}
       <div className="flex justify-center py-[3rem] px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[25px]">
-          {tools.map((tool) => (
-            <div
-              //key={tool.id}
-              onClick={() => navigate("/view/tool/123")}
-              className="group bg-[#F2F2F3] rounded-[25px] flex flex-col items-center text-center gap-[15px] px-4 py-[40px] w-full max-w-[296px] mx-auto cursor-pointer
-        hover:bg-[#E7F3FD] hover:scale-105 hover:border-2 hover:border-[#0167C4] transition-all duration-300 ease-in-out"
-            >
-              <img
-                src={tool.logo}
-                className="w-[150px] h-[150px]"
-                alt={tool.name}
-              />
-
-              <Typography
-                sx={{
-                  fontWeight: 400,
-                  fontSize: 24,
-                  color: "black",
-                  transition: "color 0.3s",
-                  ".group:hover &": {
-                    color: "#0167C4",
-                  },
-                }}
+          {tools
+            .filter((tool) =>
+              activeTab === "All" ? true : tool.category === activeTab
+            )
+            .map((tool) => (
+              <div
+                key={tool.name}
+                onClick={() => navigate("/view/tool/123")}
+                className="group bg-[#F2F2F3] rounded-[25px] flex flex-col items-center text-center gap-[15px] px-4 py-[40px] w-full max-w-[296px] mx-auto cursor-pointer
+            hover:bg-[#E7F3FD] hover:scale-105 hover:border-2 hover:border-[#0167C4] transition-all duration-300 ease-in-out"
               >
-                {tool.name}
-              </Typography>
+                <img
+                  src={tool.logo}
+                  className="w-[150px] h-[150px]"
+                  alt={tool.name}
+                />
+                <Typography
+                  sx={{
+                    fontWeight: 400,
+                    fontSize: 24,
+                    color: "black",
+                    transition: "color 0.3s",
+                    ".group:hover &": {
+                      color: "#0167C4",
+                    },
+                  }}
+                >
+                  {tool.name}
+                </Typography>
 
-              <Rating value={tool.rating} />
+                <Rating value={tool.rating} />
 
-              <Typography
-                sx={{
-                  fontWeight: 400,
-                  fontSize: 16,
-                  color: "#667085",
-                  transition: "color 0.3s",
-                  ".group:hover &": {
-                    color: "#0167C4",
-                  },
-                }}
-              >
-                {tool.desc}
-              </Typography>
-            </div>
-          ))}
+                <Typography
+                  sx={{
+                    fontWeight: 400,
+                    fontSize: 16,
+                    color: "#667085",
+                    transition: "color 0.3s",
+                    ".group:hover &": {
+                      color: "#0167C4",
+                    },
+                  }}
+                >
+                  {tool.desc}
+                </Typography>
+              </div>
+            ))}
         </div>
       </div>
 
