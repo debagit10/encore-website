@@ -1,4 +1,4 @@
-import Nav from "./Nav";
+import Nav from "./Navbar";
 import Featured from "./Featured";
 import Contact from "./Contact";
 import Footer from "./Footer";

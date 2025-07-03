@@ -1,55 +1,78 @@
-import React from "react";
-import { FaEnvelope } from "react-icons/fa";
-import { FiSmartphone } from "react-icons/fi";
+import { Button, TextField, Typography } from "@mui/material";
 
 const Contact = () => {
   return (
-    <section className="mt-8 sm:mt-12 md:mt-16 lg:mt-24 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 items-center px-4 sm:px-6 md:px-8">
-      <div className="w-full h-full p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col items-start justify-center">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[5rem] font-bold text-[#0e70cb] mb-2 leading-tight">
-          Get In Touch
-        </h2>
-        <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base md:text-lg lg:text-[2rem] leading-relaxed">
-          We are always available to assist you with your inquiries:
-        </p>
-
-        <div className="mt-4 sm:mt-6 md:mt-8 lg:mt-10 flex items-center text-sky-600 mb-3 sm:mb-4 text-sm sm:text-base md:text-lg lg:text-[2.5rem]">
-          <FiSmartphone className="mr-2 flex-shrink-0" />
-          <a
-            href="tel:+2347034504663"
-            className="hover:underline font-medium break-all sm:break-normal"
-          >
-            +234 70 3450 4663
-          </a>
+    <section className="flex gap-[10rem]">
+      <div className="flex flex-col gap-[30px]">
+        <div className="flex flex-col gap-[16px]">
+          <h1 className="text-[54px] font-bold bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] bg-clip-text text-transparent">
+            Get in touch
+          </h1>
+          <Typography fontWeight={400} fontSize={22} color="#464646">
+            We are always available to assist you with your <br /> inquiries:
+          </Typography>
         </div>
 
-        <div className="flex items-center text-sky-600 mb-4 sm:mb-6 text-sm sm:text-base md:text-lg lg:text-[2.5rem]">
-          <FaEnvelope className="mr-2 flex-shrink-0" />
-          <a
-            href="mailto:info@encoredirectories.org"
-            className="hover:underline font-medium break-all sm:break-normal"
-          >
-            info@encoredirectories.org
-          </a>
+        <div className="flex flex-col gap-[10px]">
+          <div className="flex gap-[12px] items-center">
+            <img src="/phone.png" />
+            <a href="tel:+2347034504663">
+              <p className="text-[24px] font-bold bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] bg-clip-text text-transparent">
+                +234 70 3450 4663
+              </p>
+            </a>
+          </div>
+
+          <div className="flex gap-[12px] items-center">
+            <img src="/mail.png" />
+            <a href="mailto:info@encoredirectories.org">
+              <p className="text-[24px] font-bold bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] bg-clip-text text-transparent">
+                info@encoredirectories.org
+              </p>
+            </a>
+          </div>
         </div>
 
-        <div className="flex flex-col items-start w-full mt-4 sm:mt-6 md:mt-8 lg:mt-10">
-          <textarea
+        <div className="flex flex-col gap-[15px]">
+          <TextField
             placeholder="Type in your thoughts......"
-            className="w-full sm:w-[85%] md:w-[80%] lg:w-[70%] h-24 sm:h-32 md:h-40 lg:h-[12rem] p-3 sm:p-4 rounded-xl border bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base md:text-lg lg:text-[1.5rem] mb-3 sm:mb-4 resize-none"
+            multiline
+            rows={6}
+            variant="outlined"
+            sx={{
+              width: "460px",
+              height: "187px",
+              "& .MuiInputBase-root": {
+                height: "100%",
+                backgroundColor: "#F2F2F3",
+                borderRadius: "32px",
+                border: "none",
+                padding: "16px",
+              },
+              "& fieldset": {
+                border: "none",
+              },
+            }}
           />
-          <button className="mt-2 sm:mt-4 w-full sm:w-[85%] md:w-[80%] lg:w-[70%] h-12 sm:h-14 md:h-16 lg:h-[4rem] bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold py-2 rounded-full shadow text-sm sm:text-base md:text-lg lg:text-xl transition-colors duration-200">
-            Send a Mail
-          </button>
+
+          <Button
+            disableElevation
+            variant="contained"
+            sx={{
+              width: "460px",
+              height: "56px",
+              borderRadius: "34313.73px",
+              background: "radial-gradient(circle, #2B91EE, #0167C4)",
+              textTransform: "capitalize",
+            }}
+          >
+            Send a mail
+          </Button>
         </div>
       </div>
 
       <div className="hidden lg:block">
-        <img
-          src="/contact.png"
-          alt="Customer support"
-          className="w-full h-full rounded-3xl object-cover"
-        />
+        <img src="/contact.png" alt="Customer support" />
       </div>
     </section>
   );

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   FaFacebookF,
   FaTwitter,
@@ -8,7 +7,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="mt-[3rem] bg-gradient-to-b from-[#007CF0] to-[#005FCC] text-white px-4 sm:px-6 md:px-12 lg:px-20 py-8 sm:py-10 md:py-12 rounded-t-3xl">
+    <footer className="mx-[3rem] mb-[1rem] bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] text-white px-4 sm:px-6 md:px-12 lg:px-20 py-8 sm:py-10 md:py-12 rounded-[32px]">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-6 sm:gap-8 lg:gap-10">
         <div className="flex-1">
           <div className="flex items-center mb-4">

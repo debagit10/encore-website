@@ -1,12 +1,16 @@
 // import Uno from "./components/Uno";
-import Dos from "./components/Dos";
+import React from "react";
+// import Dos from "./components/Dos";
+// import Uno from "./components/Uno";
+import { Routes, Route } from "react-router-dom";
+
+const LandingPage = React.lazy(() => import("./pages/LandingPage"));
 
 const App = () => {
   return (
-    <div className="container">
-      {/* <Uno /> */}
-      <Dos />
-    </div>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+    </Routes>
   );
 };
 

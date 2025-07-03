@@ -1,43 +1,59 @@
-import React from "react";
+import { Button, Typography } from "@mui/material";
 
 const Hero = () => {
   return (
-    <section className="max-h-screen flex flex-col items-center justify-center mt-20 ">
-      <div className="h-[3rem] w-[10rem] px-2 py-1.5 bg-blue-100 text-blue-700 font-semibold text-[20px] rounded-[0.75rem] flex items-center justify-center">
-        WELCOME
-      </div>
-      <h1 className="text-[5rem] font-bold text-gray-900 leading-tight text-center">
-        Discover <span className="text-blue-500">The Best AI Tools</span>, Read
-        Honest Reviews, And Make Smarter Tech Choices Today.
-      </h1>
-      <div className="flex items-center justify-center space-x-4 gap-4 mt-8">
-        <img src="/Group 8.png" alt="..." />
-        <div className="h-[2rem] w-[6rem] px-2 py-1.5 bg-blue-100 text-blue-800 text-[14px] rounded-[0.75rem] flex items-center justify-center">
-          +40 more
+    <div className="flex flex-col gap-[2rem] pt-[130px]">
+      <div className="flex justify-center">
+        <div className="bg-[#E7F3FD] px-[12px] py-[6px] w-[97px] rounded-[6px]  ">
+          <Typography color="#0167C4" fontWeight={700} fontSize={14}>
+            WELCOME
+          </Typography>
         </div>
       </div>
-      <p className="text-gray-500 my-8 text-[30px] text-center">
-        Browse top-rated AI tools with detailed reviews, user <br /> ratings,
-        and categories.
-      </p>
-      <button className="bg-gradient-to-b from-sky-500 to-blue-500 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition">
-        Explore Tools
-      </button>
-      <div className="flex items-center justify-center space-x-4 gap-4 mt-8">
-        <button className="flex items-center gap-3 border border-blue-300 text-[18px] rounded-full px-5 py-3 shadow-sm">
-          <img src="/mini.png" alt="" />
-          Unbiased Reviews
-        </button>
-        <button className="flex items-center gap-3 border border-blue-300 text-[18px] rounded-full px-5 py-3 shadow-sm">
-          <img src="/mini.png" alt="" />
-          Curated Categories
-        </button>
-        <button className="flex items-center gap-3 border border-blue-300 text-[18px] rounded-full px-5 py-3 shadow-sm">
-          <img src="/mini.png" alt="" />
-          Stay Updated
-        </button>
+
+      <div className="text-center">
+        <Typography fontWeight={700} fontSize={64}>
+          Discover{" "}
+          <span className="bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] bg-clip-text text-transparent">
+            The Best AI Tools
+          </span>
+          , Read <br /> Honest Reviews, And Make <br /> Smarter Tech Choices
+          Today.
+        </Typography>
       </div>
-    </section>
+
+      <div className="flex items-center justify-center">
+        <img src="/tool_group.png" alt="Group of AI tools" />
+        <div className="bg-[#E7F3FD] px-[10px] py-[4px] w-[76px] rounded-[6px]   ">
+          <Typography color="#0167C4" fontWeight={500} fontSize={12}>
+            +40 More
+          </Typography>
+        </div>
+      </div>
+
+      <div className="text-center">
+        <Typography fontWeight={400} fontSize={24} color="#667085">
+          Browse top-rated AI tools with detailed reviews, user <br /> ratings,
+          and categories.
+        </Typography>
+      </div>
+
+      <div className="flex justify-center">
+        <Button
+          disableElevation
+          variant="contained"
+          sx={{
+            width: "165px",
+            padding: "17px",
+            borderRadius: "12px",
+            background: "radial-gradient(circle, #2B91EE, #0167C4)",
+            textTransform: "capitalize",
+          }}
+        >
+          Explore Tools
+        </Button>
+      </div>
+    </div>
   );
 };
 
