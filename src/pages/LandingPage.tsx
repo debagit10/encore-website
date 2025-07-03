@@ -7,6 +7,7 @@ import About from "../components/About";
 import Testimonials from "../components/Testimonials";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const markers = [
   { label: "Unbiased Reviews" },
@@ -15,6 +16,8 @@ const markers = [
 ];
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <div>
@@ -64,7 +67,10 @@ const LandingPage = () => {
             across users
           </Typography>
 
-          <div className="flex gap-[.5rem] items-center cursor-pointer">
+          <div
+            className="flex gap-[.5rem] items-center cursor-pointer"
+            onClick={() => navigate("/explore")}
+          >
             <Typography color="#55555C" fontWeight={700} fontSize={17}>
               Start exploring
             </Typography>

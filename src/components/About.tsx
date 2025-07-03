@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { Button, Typography } from "@mui/material";
 import { MdArrowOutward } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
+  const navigate = useNavigate();
+
   const tool = [
     { id: 1, src: "/claude.png", alt: "Claude" },
     { id: 2, src: "/deep.png", alt: "Deep" },
@@ -29,6 +32,7 @@ const About = () => {
         </Typography>
 
         <Button
+          onClick={() => navigate("/explore")}
           endIcon={<MdArrowOutward />}
           disableElevation
           variant="contained"

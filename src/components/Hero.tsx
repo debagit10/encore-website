@@ -1,6 +1,9 @@
 import { Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col gap-[2rem] pt-[130px]">
       <div className="flex justify-center">
@@ -40,6 +43,7 @@ const Hero = () => {
 
       <div className="flex justify-center">
         <Button
+          onClick={() => navigate("/explore")}
           disableElevation
           variant="contained"
           sx={{

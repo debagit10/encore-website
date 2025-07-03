@@ -1,10 +1,16 @@
 import { Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="fixed w-[100%] z-1">
       <div className="flex justify-around h-[80px] items-center px-[33.5px]  bg-[#FFFFFF] border-b-[1.2px] border-[#F2F2F3]">
-        <div className="flex gap-[9px] items-center">
+        <div
+          className="flex gap-[9px] items-center"
+          onClick={() => navigate("/")}
+        >
           <img src="/logo.png" alt="Encore AI Directory Logo" />
 
           <div className="">
@@ -16,7 +22,7 @@ const Navbar = () => {
 
         <div>
           <ul className="flex gap-[1rem]">
-            <li className="cursor-pointer">
+            <li className="cursor-pointer" onClick={() => navigate("/explore")}>
               <Typography fontWeight={400} fontSize={14} color="#2B2B33">
                 A.I Directory
               </Typography>
@@ -38,6 +44,7 @@ const Navbar = () => {
 
         <div>
           <Button
+            onClick={() => navigate("/explore")}
             disableElevation
             variant="contained"
             sx={{
