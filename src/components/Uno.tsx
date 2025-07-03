@@ -12,7 +12,7 @@ const Uno = () => {
     <div>
       <Nav />
       <Hero />
-      <Info />
+     
       <Wedo />
       <Testimonials />
       <Contact />
