@@ -26,23 +26,34 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <div className="bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] rounded-[32px] mx-[3rem] p-[3rem] text-[#FFFFFF]">
-      <div className="flex flex-col gap-[40px]">
-        <div className="flex justify-center">
-          <Typography fontWeight={700} fontSize={54}>
+    <div className="bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] rounded-[32px] mx-4 md:mx-[3rem] px-4 py-8 md:p-[3rem] text-white">
+      <div className="flex flex-col gap-10">
+        {/* Heading */}
+        <div className="flex justify-center text-center">
+          <Typography
+            fontWeight={700}
+            sx={{ fontSize: { xs: 28, sm: 36, md: 44, lg: 54 } }}
+          >
             Why Use Our Platform?
           </Typography>
         </div>
 
-        <div className="flex gap-[20px] justify-center">
-          {testimonials.map((testimony) => (
-            <div className="rounded-[15px] flex flex-col gap-[40px] py-[40px] px-[20px] backdrop-blur-[25px] bg-[#F4F5FA26] border  border-transparent hover:border-[#2B91EE] hover:scale-105 transition-all duration-300 ease-in-out">
-              <Typography fontWeight={500} fontSize={17}>
+        {/* Testimonials */}
+        <div className="flex flex-col md:flex-row flex-wrap gap-6 md:gap-[20px] justify-center items-center">
+          {testimonials.map((testimony, index) => (
+            <div
+              key={index}
+              className="rounded-[15px] flex flex-col gap-6 py-6 px-4 md:py-[40px] md:px-[20px] backdrop-blur-[25px] bg-[#F4F5FA26] border border-transparent hover:border-[#2B91EE] hover:scale-105 transition-all duration-300 ease-in-out max-w-sm w-full"
+            >
+              <Typography
+                fontWeight={500}
+                sx={{ fontSize: { xs: 15, sm: 16, md: 17 } }}
+              >
                 {testimony.message}
               </Typography>
 
-              <div className="flex items-center gap-[7px]">
-                <Avatar src={testimony.image} />
+              <div className="flex items-center gap-3">
+                <Avatar src={testimony.image} alt={testimony.alt} />
                 <Typography fontWeight={700} fontSize={14}>
                   {testimony.name}
                 </Typography>

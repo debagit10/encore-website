@@ -87,50 +87,84 @@ const ExplorePage = () => {
         <Navbar />
       </div>
 
-      <div className="flex flex-col gap-[2rem] pt-[130px]">
+      <div className="flex flex-col gap-[2rem] pt-[130px] px-4 md:px-8">
+        {/* Badge */}
         <div className="flex justify-center">
-          <div className="bg-[#E7F3FD] px-[12px] py-[6px] w-[146px] text-center rounded-[6px]  ">
-            <Typography color="#0167C4" fontWeight={700} fontSize={14}>
+          <div className="bg-[#E7F3FD] px-4 py-1.5 w-fit text-center rounded-[6px]">
+            <Typography
+              sx={{ color: "#0167C4", fontWeight: 700, fontSize: 14 }}
+            >
               Featured Tools
             </Typography>
           </div>
         </div>
 
+        {/* Heading */}
         <div className="relative text-center">
-          <Typography fontWeight={700} fontSize={64}>
+          <Typography
+            sx={{
+              fontWeight: 700,
+              fontSize: {
+                xs: 36,
+                sm: 48,
+                md: 64,
+              },
+              lineHeight: 1.2,
+            }}
+          >
             Featured{" "}
-            <span className="bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] bg-clip-text text-transparent">
+            <span
+              style={{
+                background:
+                  "radial-gradient(circle at center, #2B91EE, #0167C4)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
               AI Tools{" "}
             </span>
-            Handpicked <br /> for You
+            Handpicked <br className="hidden sm:block" /> for You
           </Typography>
 
-          <div className="absolute -bottom-[3rem] right-[32rem]">
+          <div className="absolute -bottom-[5rem] right-[30rem] hidden lg:block">
             <img src="/arrow.png" alt="arrow" />
           </div>
         </div>
 
+        {/* Subtitle */}
         <div className="text-center">
-          <Typography fontWeight={400} fontSize={24} color="#667085">
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: {
+                xs: 16,
+                sm: 20,
+                md: 24,
+              },
+              color: "#667085",
+            }}
+          >
             A curated selection of high-performing tools trusted by our
-            community and rated for <br /> innovation, usability, and impact.
-            Content:
+            community and rated for <br className="hidden sm:block" />
+            innovation, usability, and impact.
           </Typography>
         </div>
       </div>
 
-      <div className="flex justify-center mt-[2rem]">
+      {/* Search Input */}
+      <div className="flex justify-center mt-8 px-4">
         <TextField
-          placeholder="What type of A.I Model are you looking for ?"
+          placeholder="What type of A.I Model are you looking for?"
           variant="outlined"
           sx={{
-            width: "950px",
+            width: "100%",
+            maxWidth: "950px",
             "& .MuiInputBase-root": {
               backgroundColor: "#F2F2F3",
               borderRadius: "64px",
               border: "none",
-              paddingX: "1rem",
-              paddingY: ".5rem",
+              px: "1rem",
+              py: ".5rem",
             },
             "& fieldset": {
               border: "none",
@@ -146,20 +180,32 @@ const ExplorePage = () => {
         />
       </div>
 
-      <div className="flex justify-center py-[3rem]">
-        <div className="grid grid-cols-3 gap-[25px]">
+      {/* Tool Cards */}
+      <div className="flex justify-center py-[3rem] px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[25px]">
           {tools.map((tool) => (
             <div
+              //key={tool.id}
               onClick={() => navigate("/view/tool/123")}
-              className="group bg-[#F2F2F3] rounded-[25px] flex flex-col items-center text-center gap-[15px] px-[14px] py-[40px] w-[296px] cursor-pointer
-            hover:bg-[#E7F3FD] hover:scale-105 hover:border-2 hover:border-[#0167C4] transition-all duration-300 ease-in-out"
+              className="group bg-[#F2F2F3] rounded-[25px] flex flex-col items-center text-center gap-[15px] px-4 py-[40px] w-full max-w-[296px] mx-auto cursor-pointer
+        hover:bg-[#E7F3FD] hover:scale-105 hover:border-2 hover:border-[#0167C4] transition-all duration-300 ease-in-out"
             >
-              <img src={tool.logo} className="w-[150px] h-[150px]" />
+              <img
+                src={tool.logo}
+                className="w-[150px] h-[150px]"
+                alt={tool.name}
+              />
 
               <Typography
-                fontWeight={400}
-                fontSize={24}
-                className="text-black group-hover:text-[#0167C4]"
+                sx={{
+                  fontWeight: 400,
+                  fontSize: 24,
+                  color: "black",
+                  transition: "color 0.3s",
+                  ".group:hover &": {
+                    color: "#0167C4",
+                  },
+                }}
               >
                 {tool.name}
               </Typography>
@@ -167,9 +213,15 @@ const ExplorePage = () => {
               <Rating value={tool.rating} />
 
               <Typography
-                fontWeight={400}
-                fontSize={16}
-                className="text-[#667085] group-hover:text-[#0167C4]"
+                sx={{
+                  fontWeight: 400,
+                  fontSize: 16,
+                  color: "#667085",
+                  transition: "color 0.3s",
+                  ".group:hover &": {
+                    color: "#0167C4",
+                  },
+                }}
               >
                 {tool.desc}
               </Typography>

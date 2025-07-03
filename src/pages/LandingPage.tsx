@@ -28,62 +28,107 @@ const LandingPage = () => {
         <Hero />
       </div>
 
-      <div className="py-[3rem] flex gap-[3rem] justify-center">
-        {markers.map((item) => (
-          <div className="flex gap-[15px] pl-[.5rem] pr-[1rem]  border-[0.34px] rounded-[34313.73px] border-[#0167C4] items-center  h-[63px]">
-            <img src="/marker.png" />
-            <Typography fontWeight={400} fontSize={18} color="#000000">
+      <div className="py-12 flex flex-wrap justify-center gap-4 sm:gap-6">
+        {markers.map((item, index) => (
+          <div
+            key={index}
+            className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 border border-[#0167C4] rounded-full h-[42px] sm:h-[63px] transition-all"
+          >
+            <img
+              src="/marker.png"
+              alt="Marker"
+              className="w-4 h-4 sm:w-6 sm:h-6 object-contain"
+            />
+            <Typography
+              fontWeight={400}
+              sx={{
+                fontSize: {
+                  xs: 13,
+                  sm: 16,
+                  md: 18,
+                },
+                color: "#000000",
+              }}
+            >
               {item.label}
             </Typography>
           </div>
         ))}
       </div>
 
-      <div className="flex justify-center gap-[2rem] items-center py-[3rem]">
-        <div className="relative inline-block">
+      <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-[2rem] items-center py-8 md:py-[3rem] px-4">
+        <div className="relative inline-block text-center md:text-left">
           <Typography
             sx={{
               background: "linear-gradient(to bottom, #000000, #666666)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
+              fontWeight: 500,
+              fontSize: {
+                xs: 32,
+                sm: 40,
+                md: 48,
+                lg: 54,
+              },
             }}
-            fontWeight={500}
-            fontSize={54}
           >
-            Increase In Productiviy <br /> & Drive Growth{" "}
+            Increase In Productivity <br /> & Drive Growth
           </Typography>
 
-          <div className="absolute -top-[.5rem] -right-[.1rem]">
+          <div className="absolute -top-[.5rem] -right-[.1rem] hidden lg:block">
             <img src="/arrow.png" alt="arrow" />
           </div>
         </div>
 
-        <div className="flex flex-col gap-[4rem]">
-          <Typography fontWeight={400} fontSize={20} color="#667085">
-            Centralise all customers feedback, and instantly categories and{" "}
-            <br />
-            reveals the underlying drivers of negative customer experiences{" "}
-            <br />
+        <div className="flex flex-col gap-8 md:gap-[4rem] text-center md:text-left">
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: {
+                xs: 14,
+                sm: 16,
+                md: 18,
+                lg: 20,
+              },
+              color: "#667085",
+            }}
+          >
+            Centralise all customers feedback, and instantly categorise and{" "}
+            <br className="hidden sm:block" />
+            reveal the underlying drivers of negative customer experiences{" "}
+            <br className="hidden sm:block" />
             across users
           </Typography>
 
           <div
-            className="flex gap-[.5rem] items-center cursor-pointer"
+            className="flex gap-2 items-center justify-center md:justify-start cursor-pointer"
             onClick={() => navigate("/explore")}
           >
-            <Typography color="#55555C" fontWeight={700} fontSize={17}>
+            <Typography
+              sx={{
+                fontWeight: 700,
+                fontSize: {
+                  xs: 15,
+                  sm: 16,
+                  md: 17,
+                },
+                color: "#55555C",
+              }}
+            >
               Start exploring
             </Typography>
 
-            <MdArrowOutward className="h-[20px] w-[20px] text-[#55555C]" />
+            <MdArrowOutward className="w-4 h-4 sm:w-5 sm:h-5 text-[#55555C]" />
           </div>
         </div>
       </div>
 
-      <div className="flex justify-end gap-[20px] py-[3rem]">
-        <img src="/gemini.png" />
-        <img src="/chatgpt.png" />
-        <img src="/copilot.png" />
+      <div className="hidden lg:block">
+        <div className="flex justify-end gap-[20px] py-[3rem] ">
+          <img src="/gemini.png" />
+          <img src="/chatgpt.png" />
+          <img src="/copilot.png" />
+        </div>
       </div>
 
       <div className="shadow-2xl shadow-[#2B91EE29] pt-[3rem]">

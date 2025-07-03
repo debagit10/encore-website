@@ -13,22 +13,29 @@ const About = () => {
   ];
 
   return (
-    <section className="flex gap-[2rem] items-center justify-center">
-      <div className="flex flex-col gap-[25px]">
-        <div className="bg-[#E7F3FD] px-[12px] py-[6px] w-[119px] rounded-[6px]  ">
-          <Typography color="#0167C4" fontWeight={700} fontSize={14}>
+    <section className="flex flex-col lg:flex-row gap-6 md:gap-[2rem] items-center justify-center px-4 py-8 md:py-16">
+      <div className="flex flex-col gap-6 md:gap-[25px] max-w-xl text-center lg:text-left">
+        <div className="bg-[#E7F3FD] px-3 py-1.5 w-max rounded-[6px] mx-auto lg:mx-0">
+          <Typography
+            color="#0167C4"
+            fontWeight={700}
+            sx={{ fontSize: { xs: 12, sm: 13, md: 14 } }}
+          >
             WHAT WE DO
           </Typography>
         </div>
+
         <Typography
           fontWeight={400}
-          fontSize={36}
-          color="#302F37"
-          lineHeight="160%"
+          sx={{
+            fontSize: { xs: 22, sm: 28, md: 32, lg: 36 },
+            lineHeight: "160%",
+            color: "#302F37",
+          }}
         >
-          We simplify AI discovery by organizing <br /> tools, enabling informed
-          choices through <br /> community insights, and showcasing <br />{" "}
-          innovations shaping the future.
+          We simplify AI discovery by organizing tools, enabling informed
+          choices through community insights, and showcasing innovations shaping
+          the future.
         </Typography>
 
         <Button
@@ -38,35 +45,38 @@ const About = () => {
           variant="contained"
           sx={{
             width: "165px",
-            padding: "17px",
+            padding: "14px",
             borderRadius: "12px",
             background: "radial-gradient(circle, #2B91EE, #0167C4)",
             textTransform: "capitalize",
+            mx: { xs: "auto", lg: "0" },
           }}
         >
           Start Exploring
         </Button>
       </div>
 
-      {/* Images hidden on small screens, shown on lg+ */}
-      <div className="flex flex-col gap-[15px]">
-        {tool.map((item, index) => (
-          <motion.div
-            key={item.id}
-            animate={{
-              scale: [1, 1.05, 1],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              delay: index * 1.5,
-              ease: "easeInOut",
-            }}
-            className="p-4 cursor-pointer overflow-hidden relative"
-          >
-            <img src={item.src} alt={item.alt} />
-          </motion.div>
-        ))}
+      {/* Images only shown on lg and above */}
+      <div className="hidden lg:block">
+        <div className="flex flex-col gap-[15px] ">
+          {tool.map((item, index) => (
+            <motion.div
+              key={item.id}
+              animate={{
+                scale: [1, 1.05, 1],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                delay: index * 1.5,
+                ease: "easeInOut",
+              }}
+              className="p-4 cursor-pointer overflow-hidden relative"
+            >
+              <img src={item.src} alt={item.alt} />
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

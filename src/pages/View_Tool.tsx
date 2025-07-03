@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import Comments from "../components/Comments";
 import Footer from "../components/Footer";
@@ -11,29 +11,67 @@ const View_Tool = () => {
 
   return (
     <div>
-      <div>
-        <Navbar />
-      </div>
+      <Navbar />
 
-      <div className="flex justify-center text-center pt-[130px]">
-        <div className="flex flex-col gap-[2rem] ">
-          <div className="flex gap-[11px] justify-center items-center">
-            <img src="/logo.png" className="w-[49px] h-[49px] " />
-            <h1 className="text-[36px] font-bold bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] bg-clip-text text-transparent">
+      <Box
+        sx={{
+          pt: { xs: "100px", sm: "120px", md: "130px" },
+          px: 2,
+          textAlign: "center",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "2rem",
+            width: "100%",
+            maxWidth: "900px",
+          }}
+        >
+          {/* Logo + Title + Rating */}
+          <Box
+            sx={{
+              display: "flex",
+              gap: "10px",
+              justifyContent: "center",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <img src="/logo.png" className="w-[49px] h-[49px]" alt="Logo" />
+            <Typography
+              sx={{
+                fontSize: { xs: 28, sm: 36 },
+                fontWeight: "bold",
+                background:
+                  "radial-gradient(circle at center, #2B91EE, #0167C4)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
               Chat GPT
-            </h1>
+            </Typography>
 
-            <div className="flex items-center">
+            <Box sx={{ display: "flex", alignItems: "center" }}>
               (4
               <AiFillStar className="text-[#FDB022]" />)
-            </div>
-          </div>
+            </Box>
+          </Box>
 
-          <Typography fontWeight={400} fontSize={20} color="#2B2B33">
+          {/* Rating Instruction */}
+          <Typography
+            fontWeight={400}
+            fontSize={{ xs: 16, sm: 18, md: 20 }}
+            color="#2B2B33"
+          >
             Kindly rate this Artificial Intelligence based on your experience
           </Typography>
 
-          <div className="flex justify-center gap-1 mt-2">
+          {/* Star Rating */}
+          <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
             {[1, 2, 3, 4, 5].map((star) => (
               <span
                 key={star}
@@ -49,39 +87,47 @@ const View_Tool = () => {
                 )}
               </span>
             ))}
-          </div>
+          </Box>
 
-          <Typography fontWeight={400} fontSize={20} color="#2B2B33">
+          {/* Comment Instruction */}
+          <Typography
+            fontWeight={400}
+            fontSize={{ xs: 16, sm: 18, md: 20 }}
+            color="#2B2B33"
+          >
             Leave a comment to let us know what you think
           </Typography>
 
-          <TextField
-            placeholder="Type in your thoughts......"
-            multiline
-            rows={6}
-            variant="outlined"
-            sx={{
-              width: "800px",
-              height: "141px",
-              "& .MuiInputBase-root": {
-                height: "100%",
-                backgroundColor: "#F2F2F3",
-                borderRadius: "32px",
-                border: "none",
-                padding: "2rem",
-              },
-              "& fieldset": {
-                border: "none",
-              },
-            }}
-          />
+          {/* Text Area */}
+          <Box sx={{ px: { xs: 0, sm: 4 } }}>
+            <TextField
+              placeholder="Type in your thoughts......"
+              multiline
+              rows={6}
+              fullWidth
+              variant="outlined"
+              sx={{
+                width: "100%",
+                "& .MuiInputBase-root": {
+                  backgroundColor: "#F2F2F3",
+                  borderRadius: "32px",
+                  border: "none",
+                  padding: "1.5rem",
+                },
+                "& fieldset": {
+                  border: "none",
+                },
+              }}
+            />
+          </Box>
 
-          <div className="flex justify-center">
+          {/* Submit Button */}
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Button
               disableElevation
               variant="contained"
               sx={{
-                width: "460px",
+                width: { xs: "100%", sm: "70%", md: "460px" },
                 height: "56px",
                 borderRadius: "34313.73px",
                 background: "radial-gradient(circle, #2B91EE, #0167C4)",
@@ -90,17 +136,23 @@ const View_Tool = () => {
             >
               Submit
             </Button>
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
 
-      <div className="flex justify-center py-[3rem]">
+      {/* Comments */}
+      <Box
+        sx={{
+          py: { xs: "2rem", md: "3rem" },
+          px: 2,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <Comments />
-      </div>
+      </Box>
 
-      <div>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };
