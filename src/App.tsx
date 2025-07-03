@@ -5,11 +5,15 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 const LandingPage = React.lazy(() => import("./pages/LandingPage"));
+const ExplorePage = React.lazy(() => import("./pages/ExplorePage"));
+const View_Tool = React.lazy(() => import("./pages/View_Tool"));
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/explore" element={<ExplorePage />} />
+      <Route path="/view/tool/:id" element={<View_Tool />} />
     </Routes>
   );
 };

@@ -80,7 +80,7 @@ const LandingPage = () => {
         <img src="/copilot.png" />
       </div>
 
-      <div className="shadow-2xl shadow-[#2B91EE29] py-[3rem]">
+      <div className="shadow-2xl shadow-[#2B91EE29] pt-[3rem]">
         <About />
       </div>
 
