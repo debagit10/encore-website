@@ -1,5 +1,5 @@
 import { Rating, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import TimeAgo from "../utils/TimeAgo";
 import api from "../utils/axiosInstance";
 import { useParams } from "react-router-dom";

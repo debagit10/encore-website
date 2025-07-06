@@ -6,61 +6,6 @@ import Rating from "../utils/Rating";
 import { useEffect, useState } from "react";
 import api from "../utils/axiosInstance";
 
-// const tools = [
-//   {
-//     name: "DeepSeek",
-//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-//     logo: "/logo.png",
-//     rating: 4,
-//     category: "Education",
-//   },
-//   {
-//     name: "ContentBot",
-//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-//     logo: "/logo.png",
-//     rating: 4,
-//     category: "Content Creation",
-//   },
-//   {
-//     name: "AI Editor Pro",
-//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-//     logo: "/logo.png",
-//     rating: 4,
-//     category: "Video Editing",
-//   },
-//   {
-//     name: "Talky AI",
-//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-//     logo: "/logo.png",
-//     rating: 4,
-//     category: "Chat Box & A.I Assistant",
-//   },
-//   {
-//     name: "WriteSmart",
-//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-//     logo: "/logo.png",
-//     rating: 4,
-//     category: "Writing",
-//   },
-//   {
-//     name: "ImageForge",
-//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-//     logo: "/logo.png",
-//     rating: 4,
-//     category: "Image Generation",
-//   },
-// ];
-
-// const tabs = [
-//   { name: "All" },
-//   { name: "Education" },
-//   { name: "Content Creation" },
-//   { name: "Video Editing" },
-//   { name: "Chat Box & A.I Assistant" },
-//   { name: "Writing" },
-//   { name: "Image Generation" },
-// ];
-
 interface ToolState {
   _id: string;
   name: string;

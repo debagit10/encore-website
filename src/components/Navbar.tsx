@@ -46,20 +46,24 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <Button
-          onClick={() => navigate("/explore")}
-          disableElevation
-          variant="contained"
-          sx={{
-            width: "165px",
-            padding: "17px",
-            borderRadius: "12px",
-            background: "radial-gradient(circle, #2B91EE, #0167C4)",
-            textTransform: "capitalize",
-          }}
-        >
-          Explore Tools
-        </Button>
+        {!mobileOpen && (
+          <div className="hidden md:block">
+            <Button
+              onClick={() => navigate("/explore")}
+              disableElevation
+              variant="contained"
+              sx={{
+                width: "165px",
+                padding: "17px",
+                borderRadius: "12px",
+                background: "radial-gradient(circle, #2B91EE, #0167C4)",
+                textTransform: "capitalize",
+              }}
+            >
+              Explore Tools
+            </Button>
+          </div>
+        )}
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
