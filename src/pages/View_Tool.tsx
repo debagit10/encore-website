@@ -1,13 +1,121 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import Comments from "../components/Comments";
 import Footer from "../components/Footer";
+import { useParams } from "react-router-dom";
+import api from "../utils/axiosInstance";
+import Toast from "../utils/Toast";
+
+interface Category {
+  _id: string;
+  name: string;
+}
+
+interface ToolDetails {
+  name: string;
+  description: string;
+  category_id: Category;
+  image: string;
+  demo_url: string;
+  _id: string;
+}
+
+interface ToastState {
+  open: boolean;
+  message: string;
+  severity: "success" | "info" | "error" | "warning";
+}
 
 const View_Tool = () => {
   const [rating, setRating] = useState(0);
+  const [message, setMessage] = useState("");
   const [hoveredStar, setHoveredStar] = useState(0);
+  const [loading, setLoading] = useState<boolean>(false);
+  const { id } = useParams();
+
+  const [toolData, setToolData] = useState<ToolDetails>({
+    name: "",
+    description: "",
+    demo_url: "",
+    image: "",
+    _id: "",
+    category_id: { _id: "", name: "" },
+  });
+
+  const [toast, setToast] = useState<ToastState>({
+    open: false,
+    message: "",
+    severity: "info",
+  });
+
+  const showToast = (message: string, severity: ToastState["severity"]) => {
+    setToast({ open: true, message, severity });
+  };
+
+  const handleCloseToast = () => {
+    setToast((prev) => ({ ...prev, open: false }));
+    setLoading(false);
+  };
+
+  const getTool = async () => {
+    setLoading(true);
+
+    try {
+      const response = await api.get(`/api/tool/${id}`);
+      if (response.data.success) {
+        setToolData(response.data.data[0]);
+        return;
+      }
+    } catch (error: any) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const reviewData = {
+    rating,
+    message,
+    toolId: toolData._id,
+    categoryId: toolData.category_id._id,
+  };
+
+  const submit = async () => {
+    setLoading(true);
+
+    try {
+      const response = await api.post(`/api/review/add`, reviewData);
+      if (response.data.success) {
+        showToast(response.data.message, "success");
+      }
+    } catch (error: any) {
+      if (error.response.data.error) {
+        console.log(error);
+        setLoading(false);
+        showToast(error.response.data.error, "error");
+        return;
+      }
+    }
+  };
+
+  const trackVisit = async () => {
+    try {
+      await api.post(`/api/track-visits/${toolData._id}`);
+    } catch (error: any) {
+      if (error.response.data.error) {
+        console.log(error);
+
+        showToast("Cannot visit", "error");
+        return;
+      }
+    }
+  };
+
+  useEffect(() => {
+    getTool();
+  }, []);
 
   return (
     <div>
@@ -22,6 +130,12 @@ const View_Tool = () => {
           justifyContent: "center",
         }}
       >
+        <Toast
+          open={toast.open}
+          message={toast.message}
+          severity={toast.severity}
+          onClose={handleCloseToast}
+        />
         <Box
           sx={{
             display: "flex",
@@ -41,7 +155,11 @@ const View_Tool = () => {
               flexWrap: "wrap",
             }}
           >
-            <img src="/logo.png" className="w-[49px] h-[49px]" alt="Logo" />
+            <img
+              src={toolData.image}
+              className="w-[49px] h-[49px]"
+              alt={`Logo for ${toolData.name}`}
+            />
             <Typography
               sx={{
                 fontSize: { xs: 28, sm: 36 },
@@ -52,7 +170,7 @@ const View_Tool = () => {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              Chat GPT
+              {toolData.name}
             </Typography>
 
             <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -60,6 +178,18 @@ const View_Tool = () => {
               <AiFillStar className="text-[#FDB022]" />)
             </Box>
           </Box>
+
+          <div className="flex justify-center">
+            <div className="bg-[#E7F3FD] px-4 py-1.5 w-fit text-center rounded-[6px] ">
+              <a href={toolData.demo_url} target="_blank" onClick={trackVisit}>
+                <Typography
+                  sx={{ color: "#0167C4", fontWeight: 700, fontSize: 14 }}
+                >
+                  Visit
+                </Typography>
+              </a>
+            </div>
+          </div>
 
           {/* Rating Instruction */}
           <Typography
@@ -101,6 +231,7 @@ const View_Tool = () => {
           {/* Text Area */}
           <Box sx={{ px: { xs: 0, sm: 4 } }}>
             <TextField
+              onChange={(e) => setMessage(e.target.value)}
               placeholder="Type in your thoughts......"
               multiline
               rows={6}
@@ -124,6 +255,8 @@ const View_Tool = () => {
           {/* Submit Button */}
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Button
+              disabled={!message || loading}
+              onClick={submit}
               disableElevation
               variant="contained"
               sx={{
@@ -134,7 +267,7 @@ const View_Tool = () => {
                 textTransform: "capitalize",
               }}
             >
-              Submit
+              {loading ? "Submitting..." : "Submit"}
             </Button>
           </Box>
         </Box>

@@ -3,67 +3,123 @@ import { InputAdornment, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Rating from "../utils/Rating";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import api from "../utils/axiosInstance";
 
-const tools = [
-  {
-    name: "DeepSeek",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-    category: "Education",
-  },
-  {
-    name: "ContentBot",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-    category: "Content Creation",
-  },
-  {
-    name: "AI Editor Pro",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-    category: "Video Editing",
-  },
-  {
-    name: "Talky AI",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-    category: "Chat Box & A.I Assistant",
-  },
-  {
-    name: "WriteSmart",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-    category: "Writing",
-  },
-  {
-    name: "ImageForge",
-    desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
-    logo: "/logo.png",
-    rating: 4,
-    category: "Image Generation",
-  },
-];
+// const tools = [
+//   {
+//     name: "DeepSeek",
+//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
+//     logo: "/logo.png",
+//     rating: 4,
+//     category: "Education",
+//   },
+//   {
+//     name: "ContentBot",
+//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
+//     logo: "/logo.png",
+//     rating: 4,
+//     category: "Content Creation",
+//   },
+//   {
+//     name: "AI Editor Pro",
+//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
+//     logo: "/logo.png",
+//     rating: 4,
+//     category: "Video Editing",
+//   },
+//   {
+//     name: "Talky AI",
+//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
+//     logo: "/logo.png",
+//     rating: 4,
+//     category: "Chat Box & A.I Assistant",
+//   },
+//   {
+//     name: "WriteSmart",
+//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
+//     logo: "/logo.png",
+//     rating: 4,
+//     category: "Writing",
+//   },
+//   {
+//     name: "ImageForge",
+//     desc: "DeepSeek is a cutting-edge open-source AI model from China,focused on code generation, reasoning, and research tasks acrosstext and programming languages.",
+//     logo: "/logo.png",
+//     rating: 4,
+//     category: "Image Generation",
+//   },
+// ];
 
-const tabs = [
-  { name: "All" },
-  { name: "Education" },
-  { name: "Content Creation" },
-  { name: "Video Editing" },
-  { name: "Chat Box & A.I Assistant" },
-  { name: "Writing" },
-  { name: "Image Generation" },
-];
+// const tabs = [
+//   { name: "All" },
+//   { name: "Education" },
+//   { name: "Content Creation" },
+//   { name: "Video Editing" },
+//   { name: "Chat Box & A.I Assistant" },
+//   { name: "Writing" },
+//   { name: "Image Generation" },
+// ];
+
+interface ToolState {
+  _id: string;
+  name: string;
+  description: string;
+  category_id: Category;
+  image: string;
+  demo_url: string;
+}
+
+interface Category {
+  _id: string;
+  name: string;
+}
+
+interface CategoryDetails {
+  _id: string;
+  name: string;
+  description: string;
+  toolCount: number;
+}
 
 const ExplorePage = () => {
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("All");
+
+  const [categories, setCategories] = useState<CategoryDetails[]>();
+  const [tools, setTools] = useState<ToolState[]>();
+
+  const getCategories = async () => {
+    try {
+      const response = await api.get("/api/category/all");
+      if (response.data.success) {
+        setCategories(response.data.data);
+
+        return;
+      }
+    } catch (error: any) {
+      console.error(error);
+    }
+  };
+
+  const getTools = async () => {
+    try {
+      const response = await api.get("/api/tool/all");
+      if (response.data.success) {
+        setTools(response.data.data);
+
+        return;
+      }
+    } catch (error: any) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getCategories();
+    getTools();
+  }, []);
 
   return (
     <div>
@@ -167,7 +223,7 @@ const ExplorePage = () => {
       {/* Tabs */}
       <div className="mt-[3rem] px-4 overflow-x-auto scrollbar-hide">
         <ul className="flex gap-3 sm:gap-5 md:gap-6 lg:gap-[30px] min-w-max md:justify-center">
-          {tabs.map((tab) => (
+          {categories?.map((tab) => (
             <li
               key={tab.name}
               className={`py-2 px-4 whitespace-nowrap cursor-pointer rounded-[72px] transition-all duration-200 ${
@@ -198,18 +254,18 @@ const ExplorePage = () => {
       <div className="flex justify-center py-[3rem] px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[25px]">
           {tools
-            .filter((tool) =>
-              activeTab === "All" ? true : tool.category === activeTab
+            ?.filter((tool) =>
+              activeTab === "All" ? true : tool.category_id.name === activeTab
             )
             .map((tool) => (
               <div
                 key={tool.name}
-                onClick={() => navigate("/view/tool/123")}
+                onClick={() => navigate(`/view/tool/${tool._id}`)}
                 className="group bg-[#F2F2F3] rounded-[25px] flex flex-col items-center text-center gap-[15px] px-4 py-[40px] w-full max-w-[296px] mx-auto cursor-pointer
             hover:bg-[#E7F3FD] hover:scale-105 hover:border-2 hover:border-[#0167C4] transition-all duration-300 ease-in-out"
               >
                 <img
-                  src={tool.logo}
+                  src={tool.image}
                   className="w-[150px] h-[150px]"
                   alt={tool.name}
                 />
@@ -227,7 +283,7 @@ const ExplorePage = () => {
                   {tool.name}
                 </Typography>
 
-                <Rating value={tool.rating} />
+                <Rating value={4} />
 
                 <Typography
                   sx={{
@@ -240,7 +296,7 @@ const ExplorePage = () => {
                     },
                   }}
                 >
-                  {tool.desc}
+                  {tool.description}
                 </Typography>
               </div>
             ))}
