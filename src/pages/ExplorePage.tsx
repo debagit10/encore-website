@@ -68,6 +68,7 @@ interface ToolState {
   category_id: Category;
   image: string;
   demo_url: string;
+  averageRating: number;
 }
 
 interface Category {
@@ -283,7 +284,7 @@ const ExplorePage = () => {
                   {tool.name}
                 </Typography>
 
-                <Rating value={4} />
+                <Rating value={tool.averageRating} />
 
                 <Typography
                   sx={{

@@ -20,6 +20,7 @@ interface ToolDetails {
   image: string;
   demo_url: string;
   _id: string;
+  averageRating: number;
 }
 
 interface ToastState {
@@ -42,6 +43,7 @@ const View_Tool = () => {
     image: "",
     _id: "",
     category_id: { _id: "", name: "" },
+    averageRating: 0,
   });
 
   const [toast, setToast] = useState<ToastState>({
@@ -65,7 +67,7 @@ const View_Tool = () => {
     try {
       const response = await api.get(`/api/tool/${id}`);
       if (response.data.success) {
-        setToolData(response.data.data[0]);
+        setToolData(response.data.data);
         return;
       }
     } catch (error: any) {
@@ -174,7 +176,7 @@ const View_Tool = () => {
             </Typography>
 
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              (4
+              ({toolData.averageRating}
               <AiFillStar className="text-[#FDB022]" />)
             </Box>
           </Box>
