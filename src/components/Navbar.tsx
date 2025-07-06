@@ -33,12 +33,24 @@ const Navbar = () => {
                 A.I Directory
               </Typography>
             </li>
-            <li className="cursor-pointer">
+            <li
+              className="cursor-pointer"
+              onClick={() => {
+                navigate("/", { state: { scrollTo: "about" } });
+                setMobileOpen(false);
+              }}
+            >
               <Typography fontWeight={400} fontSize={14} color="#2B2B33">
                 About Us
               </Typography>
             </li>
-            <li className="cursor-pointer">
+            <li
+              className="cursor-pointer"
+              onClick={() => {
+                navigate("/", { state: { scrollTo: "contact" } });
+                setMobileOpen(false);
+              }}
+            >
               <Typography fontWeight={400} fontSize={14} color="#2B2B33">
                 Contact Us
               </Typography>
@@ -67,7 +79,10 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
-          <button onClick={() => setMobileOpen(!mobileOpen)}>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
             {mobileOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
         </div>
@@ -86,10 +101,22 @@ const Navbar = () => {
             >
               A.I Directory
             </li>
-            <li className="cursor-pointer" onClick={() => setMobileOpen(false)}>
+            <li
+              className="cursor-pointer"
+              onClick={() => {
+                navigate("/", { state: { scrollTo: "about" } });
+                setMobileOpen(false);
+              }}
+            >
               About Us
             </li>
-            <li className="cursor-pointer" onClick={() => setMobileOpen(false)}>
+            <li
+              className="cursor-pointer"
+              onClick={() => {
+                navigate("/", { state: { scrollTo: "contact" } });
+                setMobileOpen(false);
+              }}
+            >
               Contact Us
             </li>
             <Button

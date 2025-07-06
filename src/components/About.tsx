@@ -13,7 +13,10 @@ const About = () => {
   ];
 
   return (
-    <section className="flex flex-col lg:flex-row gap-6 md:gap-[2rem] items-center justify-center px-4 py-8 md:py-16">
+    <section
+      className="flex flex-col lg:flex-row gap-6 md:gap-[2rem] items-center justify-center px-4 py-8 md:py-16"
+      id="about"
+    >
       <div className="flex flex-col gap-6 md:gap-[25px] max-w-xl text-center lg:text-left">
         <div className="bg-[#E7F3FD] px-3 py-1.5 w-max rounded-[6px] mx-auto lg:mx-0">
           <Typography

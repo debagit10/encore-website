@@ -1,8 +1,26 @@
 import { Button, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 
 const Contact = () => {
+  const [message, setMessage] = useState("");
+
+  const handleSendMail = () => {
+    const email = "debacodes@gmail.com";
+    const subject = encodeURIComponent("Feedback or Comment");
+    const body = encodeURIComponent(message);
+
+    // Compose mailto URL
+    const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
+
+    // Open mail client
+    window.open(mailtoLink, "_blank");
+  };
+
   return (
-    <section className="flex flex-col lg:flex-row gap-12 lg:gap-[10rem] px-4 md:px-10 py-10 items-start">
+    <section
+      className="flex flex-col lg:flex-row gap-12 lg:gap-[10rem] px-4 md:px-10 py-10 items-start"
+      id="contact"
+    >
       {/* Text + Form Section */}
       <div className="flex flex-col gap-8 flex-1">
         {/* Heading + Subtext */}
@@ -32,7 +50,7 @@ const Contact = () => {
 
           <div className="flex gap-3 items-center">
             <img src="/mail.png" alt="Email" className="w-6 h-6" />
-            <a href="mailto:info@encoredirectories.org">
+            <a href="mailto:info@encoredirectories.org" target="_blank">
               <p className="text-[20px] sm:text-[24px] font-bold bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] bg-clip-text text-transparent">
                 info@encoredirectories.org
               </p>
@@ -43,6 +61,7 @@ const Contact = () => {
         {/* Form */}
         <div className="flex flex-col gap-4 w-full max-w-[460px]">
           <TextField
+            onChange={(e) => setMessage(e.target.value)}
             placeholder="Type in your thoughts..."
             multiline
             rows={6}
@@ -59,6 +78,7 @@ const Contact = () => {
           />
 
           <Button
+            onClick={handleSendMail}
             disableElevation
             variant="contained"
             sx={{

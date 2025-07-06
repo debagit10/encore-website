@@ -4,8 +4,11 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   return (
     <footer className="bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] text-white px-4 sm:px-6 md:px-8 lg:px-20 py-10 rounded-[32px] mx-4 sm:mx-6 md:mx-10 lg:mx-[5rem] mb-6">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-10">
@@ -46,20 +49,24 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-3">Quick Links</h3>
             <ul className="space-y-2 text-white/80">
-              <li>
-                <a href="#" className="hover:underline">
-                  Home
-                </a>
+              <li
+                className="cursor-pointer hover:underline underline-offset-4"
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                Home
               </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  About us
-                </a>
+              <li
+                className="cursor-pointer hover:underline underline-offset-4"
+                onClick={() => {
+                  navigate("/", { state: { scrollTo: "about" } });
+                }}
+              >
+                About us
               </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  FAQs
-                </a>
+              <li className="cursor-pointer hover:underline underline-offset-4">
+                FAQs
               </li>
             </ul>
           </div>
