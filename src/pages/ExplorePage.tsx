@@ -3,7 +3,7 @@ import { InputAdornment, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Rating from "../utils/Rating";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import api from "../utils/axiosInstance";
 
 interface ToolState {
@@ -31,10 +31,11 @@ interface CategoryDetails {
 const ExplorePage = () => {
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState("All");
+  const [activeTab, setActiveTab] = useState("all");
 
   const [categories, setCategories] = useState<CategoryDetails[]>();
   const [tools, setTools] = useState<ToolState[]>();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getCategories = async () => {
     try {
@@ -66,6 +67,15 @@ const ExplorePage = () => {
     getCategories();
     getTools();
   }, []);
+
+  const filteredTools = useMemo(() => {
+    if (!searchQuery.trim()) return tools;
+    return tools?.filter((tool) =>
+      `${tool.name} ${tool.category_id.name}`
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
+    );
+  }, [searchQuery, tools]);
 
   return (
     <div>
@@ -140,6 +150,7 @@ const ExplorePage = () => {
       {/* Search Input */}
       <div className="flex justify-center mt-8 px-4">
         <TextField
+          onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="What type of A.I Model are you looking for?"
           variant="outlined"
           sx={{
@@ -221,7 +232,7 @@ const ExplorePage = () => {
       {/* Tool Cards */}
       <div className="flex justify-center py-[3rem] px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[25px]">
-          {tools
+          {filteredTools
             ?.filter((tool) =>
               activeTab === "all" ? true : tool.category_id.name === activeTab
             )
@@ -229,7 +240,7 @@ const ExplorePage = () => {
               <div
                 key={tool.name}
                 onClick={() => navigate(`/view/tool/${tool._id}`)}
-                className="group bg-[#F2F2F3] rounded-[25px] flex flex-col items-center text-center gap-[15px] px-4 py-[40px] w-full max-w-[296px] mx-auto cursor-pointer
+                className=" bg-[#F2F2F3] rounded-[25px] flex flex-col items-center text-center gap-[15px] px-4 py-[40px] w-full max-w-[296px] mx-auto cursor-pointer
             hover:bg-[#E7F3FD] hover:scale-105 hover:border-2 hover:border-[#0167C4] transition-all duration-300 ease-in-out"
               >
                 <img
