@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import { InputAdornment, TextField, Typography } from "@mui/material";
+import { InputAdornment, Skeleton, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Rating from "../utils/Rating";
@@ -32,6 +32,7 @@ const ExplorePage = () => {
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("all");
+  const [loading, setLoading] = useState(false);
 
   const [categories, setCategories] = useState<CategoryDetails[]>();
   const [tools, setTools] = useState<ToolState[]>();
@@ -52,10 +53,11 @@ const ExplorePage = () => {
 
   const getTools = async () => {
     try {
+      setLoading(true);
       const response = await api.get("/api/tool/all");
       if (response.data.success) {
         setTools(response.data.data);
-
+        setLoading(false);
         return;
       }
     } catch (error: any) {
@@ -67,6 +69,20 @@ const ExplorePage = () => {
     getCategories();
     getTools();
   }, []);
+
+  const renderSkeletonCards = () => {
+    return Array.from({ length: 6 }).map((_, index) => (
+      <div
+        key={index}
+        className="bg-[#F2F2F3] rounded-[25px] flex flex-col items-center text-center gap-[15px] px-4 py-[40px] w-full max-w-[296px] mx-auto"
+      >
+        <Skeleton variant="rectangular" width={150} height={150} />
+        <Skeleton variant="text" width={120} height={32} />
+        <Skeleton variant="text" width={100} height={24} />
+        <Skeleton variant="text" width={200} height={48} />
+      </div>
+    ));
+  };
 
   const filteredTools = useMemo(() => {
     if (!searchQuery.trim()) return tools;
@@ -232,53 +248,37 @@ const ExplorePage = () => {
       {/* Tool Cards */}
       <div className="flex justify-center py-[3rem] px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[25px]">
-          {filteredTools
-            ?.filter((tool) =>
-              activeTab === "all" ? true : tool.category_id.name === activeTab
-            )
-            .map((tool) => (
-              <div
-                key={tool.name}
-                onClick={() => navigate(`/view/tool/${tool._id}`)}
-                className=" bg-[#F2F2F3] rounded-[25px] flex flex-col items-center text-center gap-[15px] px-4 py-[40px] w-full max-w-[296px] mx-auto cursor-pointer
-            hover:bg-[#E7F3FD] hover:scale-105 hover:border-2 hover:border-[#0167C4] transition-all duration-300 ease-in-out"
-              >
-                <img
-                  src={tool.image}
-                  className="w-[150px] h-[150px]"
-                  alt={tool.name}
-                />
-                <Typography
-                  sx={{
-                    fontWeight: 400,
-                    fontSize: 24,
-                    color: "black",
-                    transition: "color 0.3s",
-                    ".group:hover &": {
-                      color: "#0167C4",
-                    },
-                  }}
-                >
-                  {tool.name}
-                </Typography>
+          {loading
+            ? renderSkeletonCards()
+            : filteredTools
+                ?.filter((tool) =>
+                  activeTab === "all"
+                    ? true
+                    : tool.category_id.name === activeTab
+                )
+                .map((tool) => (
+                  <div
+                    key={tool.name}
+                    onClick={() => navigate(`/view/tool/${tool._id}`)}
+                    className="bg-[#F2F2F3] rounded-[25px] flex flex-col items-center text-center gap-[15px] px-4 py-[40px] w-full max-w-[296px] mx-auto cursor-pointer
+              hover:bg-[#E7F3FD] hover:scale-105 hover:border-2 hover:border-[#0167C4] transition-all duration-300 ease-in-out"
+                  >
+                    <img
+                      src={tool.image}
+                      className="w-[150px] h-[150px]"
+                      alt={tool.name}
+                    />
+                    <Typography fontWeight={400} fontSize={24} color="black">
+                      {tool.name}
+                    </Typography>
 
-                <Rating value={tool.averageRating} />
+                    <Rating value={tool.averageRating} />
 
-                <Typography
-                  sx={{
-                    fontWeight: 400,
-                    fontSize: 16,
-                    color: "#667085",
-                    transition: "color 0.3s",
-                    ".group:hover &": {
-                      color: "#0167C4",
-                    },
-                  }}
-                >
-                  {tool.description}
-                </Typography>
-              </div>
-            ))}
+                    <Typography fontWeight={400} fontSize={16} color="#667085">
+                      {tool.description}
+                    </Typography>
+                  </div>
+                ))}
         </div>
       </div>
 

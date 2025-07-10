@@ -10,7 +10,7 @@ const Footer = () => {
   const navigate = useNavigate();
 
   return (
-    <footer className="bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] text-white px-4 sm:px-6 md:px-8 lg:px-20 py-10 rounded-[32px] mx-4 sm:mx-6 md:mx-10 lg:mx-[5rem] mb-6">
+    <footer className="bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] text-white px-4 sm:px-6 md:px-8 lg:px-20 py-10 rounded-[32px] mx-4 sm:mx-6 md:mx-10 lg:mx-[1rem] mb-6">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-10">
         {/* Left section */}
         <div className="flex-1">

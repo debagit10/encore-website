@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Backdrop,
+  Box,
+  Button,
+  CircularProgress,
+  Skeleton,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import Comments from "../components/Comments";
 import Footer from "../components/Footer";
@@ -169,130 +177,182 @@ const View_Tool = () => {
               flexWrap: "wrap",
             }}
           >
-            <img
-              src={toolData.image}
-              className="w-[49px] h-[49px]"
-              alt={`Logo for ${toolData.name}`}
-            />
-            <Typography
-              sx={{
-                fontSize: { xs: 28, sm: 36 },
-                fontWeight: "bold",
-                background:
-                  "radial-gradient(circle at center, #2B91EE, #0167C4)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              {toolData.name}
-            </Typography>
+            {loading ? (
+              <Skeleton variant="circular" width={49} height={49} />
+            ) : (
+              <img
+                src={toolData.image}
+                className="w-[49px] h-[49px]"
+                alt={`Logo for ${toolData.name}`}
+              />
+            )}
 
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              ({toolData.averageRating}
-              <AiFillStar className="text-[#FDB022]" />)
-            </Box>
+            {loading ? (
+              <Skeleton variant="text" width={200} height={40} />
+            ) : (
+              <Typography
+                sx={{
+                  fontSize: { xs: 28, sm: 36 },
+                  fontWeight: "bold",
+                  background:
+                    "radial-gradient(circle at center, #2B91EE, #0167C4)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                {toolData.name}
+              </Typography>
+            )}
+
+            {loading ? (
+              <Skeleton variant="text" width={50} height={30} />
+            ) : (
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                ({toolData.averageRating}
+                <AiFillStar className="text-[#FDB022]" />)
+              </Box>
+            )}
           </Box>
 
           <div className="flex justify-center">
-            <div className="bg-[#E7F3FD] px-4 py-1.5 w-fit text-center rounded-[6px] ">
-              <a href={toolData.demo_url} target="_blank" onClick={trackVisit}>
-                <Typography
-                  sx={{ color: "#0167C4", fontWeight: 700, fontSize: 14 }}
+            <div className="bg-[#E7F3FD] px-4 py-1.5 w-fit text-center rounded-[6px]">
+              {loading ? (
+                <Skeleton variant="text" width={60} />
+              ) : (
+                <a
+                  href={toolData.demo_url}
+                  target="_blank"
+                  onClick={trackVisit}
                 >
-                  Visit
-                </Typography>
-              </a>
+                  <Typography
+                    sx={{ color: "#0167C4", fontWeight: 700, fontSize: 14 }}
+                  >
+                    Visit
+                  </Typography>
+                </a>
+              )}
             </div>
           </div>
 
           {/* Rating Instruction */}
-          <Typography
-            fontWeight={400}
-            fontSize={{ xs: 16, sm: 18, md: 20 }}
-            color="#2B2B33"
-          >
-            Kindly rate this Artificial Intelligence based on your experience
-          </Typography>
+          {loading ? (
+            <div className="flex justify-center">
+              <Skeleton variant="text" width={300} height={30} />
+            </div>
+          ) : (
+            <Typography
+              fontWeight={400}
+              fontSize={{ xs: 16, sm: 18, md: 20 }}
+              color="#2B2B33"
+            >
+              Kindly rate this Artificial Intelligence based on your experience
+            </Typography>
+          )}
 
           {/* Star Rating */}
-          <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
-            {[1, 2, 3, 4, 5].map((star) => (
-              <span
-                key={star}
-                onClick={() => setRating(star)}
-                onMouseEnter={() => setHoveredStar(star)}
-                onMouseLeave={() => setHoveredStar(0)}
-                className="text-[#FDB022] text-2xl cursor-pointer transition-transform hover:scale-125"
-              >
-                {star <= (hoveredStar || rating) ? (
-                  <AiFillStar />
-                ) : (
-                  <AiOutlineStar />
-                )}
-              </span>
-            ))}
-          </Box>
+          {loading ? (
+            <div className="flex justify-center">
+              <Skeleton variant="rectangular" width={160} height={30} />
+            </div>
+          ) : (
+            <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  onClick={() => setRating(star)}
+                  onMouseEnter={() => setHoveredStar(star)}
+                  onMouseLeave={() => setHoveredStar(0)}
+                  className="text-[#FDB022] text-2xl cursor-pointer transition-transform hover:scale-125"
+                >
+                  {star <= (hoveredStar || rating) ? (
+                    <AiFillStar />
+                  ) : (
+                    <AiOutlineStar />
+                  )}
+                </span>
+              ))}
+            </Box>
+          )}
 
           {/* Comment Instruction */}
-          <Typography
-            fontWeight={400}
-            fontSize={{ xs: 16, sm: 18, md: 20 }}
-            color="#2B2B33"
-          >
-            Leave a comment to let us know what you think
-          </Typography>
+
+          {loading ? (
+            <div className="flex justify-center">
+              <Skeleton variant="text" width={300} height={30} />
+            </div>
+          ) : (
+            <Typography
+              fontWeight={400}
+              fontSize={{ xs: 16, sm: 18, md: 20 }}
+              color="#2B2B33"
+            >
+              Leave a comment to let us know what you think
+            </Typography>
+          )}
 
           {/* Text Area */}
-          <Box sx={{ px: { xs: 0, sm: 4 } }}>
-            <TextField
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Type in your thoughts......"
-              multiline
-              rows={6}
-              fullWidth
-              variant="outlined"
-              sx={{
-                width: "100%",
-                "& .MuiInputBase-root": {
-                  backgroundColor: "#F2F2F3",
-                  borderRadius: "32px",
-                  border: "none",
-                  padding: "1.5rem",
-                },
-                "& fieldset": {
-                  border: "none",
-                },
-              }}
+          {loading ? (
+            <Skeleton
+              variant="rectangular"
+              height={150}
+              sx={{ borderRadius: "32px" }}
             />
-          </Box>
+          ) : (
+            <Box sx={{ px: { xs: 0, sm: 4 } }}>
+              <TextField
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Type in your thoughts......"
+                multiline
+                rows={6}
+                fullWidth
+                variant="outlined"
+                sx={{
+                  width: "100%",
+                  "& .MuiInputBase-root": {
+                    backgroundColor: "#F2F2F3",
+                    borderRadius: "32px",
+                    border: "none",
+                    padding: "1.5rem",
+                  },
+                  "& fieldset": {
+                    border: "none",
+                  },
+                }}
+              />
+            </Box>
+          )}
 
           {/* Submit Button */}
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Button
-              disabled={loading}
-              onClick={submit}
-              disableElevation
-              variant="outlined"
-              sx={{
-                width: { xs: "100%", sm: "70%", md: "460px" },
-                height: "56px",
-                borderRadius: "34313.73px",
-                color: !message || loading ? "#black" : "white",
-                borderColor:
-                  !message || loading
-                    ? "#ccc"
-                    : "radial-gradient(circle, #2B91EE, #0167C4)",
-                background:
-                  !message || loading
-                    ? "#ccc"
-                    : "radial-gradient(circle, #2B91EE, #0167C4)",
-                textTransform: "capitalize",
-                cursor: !message || loading ? "not-allowed" : "pointer",
-              }}
-            >
-              {loading ? "Submitting..." : "Submit"}
-            </Button>
+            {loading ? (
+              <Skeleton variant="rectangular" width="60%" height={56} />
+            ) : (
+              <Button
+                disabled={loading || !message}
+                onClick={submit}
+                disableElevation
+                variant="outlined"
+                sx={{
+                  width: { xs: "100%", sm: "70%", md: "460px" },
+                  height: "56px",
+                  borderRadius: "34313.73px",
+                  color: !message || loading ? "#black" : "white",
+                  borderColor:
+                    !message || loading
+                      ? "#ccc"
+                      : "radial-gradient(circle, #2B91EE, #0167C4)",
+                  background:
+                    !message || loading
+                      ? "#ccc"
+                      : "radial-gradient(circle, #2B91EE, #0167C4)",
+                  textTransform: "capitalize",
+                  cursor: !message || loading ? "not-allowed" : "pointer",
+                }}
+              >
+                {loading ? "Submitting..." : "Submit"}
+              </Button>
+            )}
           </Box>
         </Box>
       </Box>
@@ -310,6 +370,13 @@ const View_Tool = () => {
       </Box>
 
       <Footer />
+
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };
