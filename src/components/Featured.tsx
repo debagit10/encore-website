@@ -14,7 +14,7 @@ const categories = [
   "Education",
   "Content Creation",
   "Video Editing",
-  "Chat Box & A.I Assistant",
+  "Chat Box & AI Assistant",
   "Writing",
   "Image Generation",
 ];
@@ -43,7 +43,7 @@ function Featured() {
         <div className="relative w-full max-w-2xl mx-auto mb-6 h-auto">
           <input
             type="text"
-            placeholder="What type of A.I Model are you looking for ?"
+            placeholder="What type of AI Model are you looking for ?"
             className="w-full border border-gray-300 rounded-full py-3 px-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <button className="absolute right-3 top-1/2 -translate-y-1/2 bg-blue-500 text-white rounded-full p-2 shadow hover:bg-blue-600 transition-colors">

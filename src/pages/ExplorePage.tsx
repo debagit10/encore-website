@@ -140,7 +140,7 @@ const ExplorePage = () => {
       {/* Search Input */}
       <div className="flex justify-center mt-8 px-4">
         <TextField
-          placeholder="What type of A.I Model are you looking for?"
+          placeholder="What type of AI Model are you looking for?"
           variant="outlined"
           sx={{
             width: "100%",
@@ -159,7 +159,7 @@ const ExplorePage = () => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <img src="/search.png" alt="Search A.I Tool" />
+                <img src="/search.png" alt="Search AI Tool" />
               </InputAdornment>
             ),
           }}
