@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Rating from "../utils/Rating";
 import { useEffect, useMemo, useState } from "react";
 import api from "../utils/axiosInstance";
+import { Helmet } from "react-helmet-async";
 
 interface ToolState {
   _id: string;
@@ -95,6 +96,9 @@ const ExplorePage = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Explore AI Tools | Encore AI Directory</title>
+      </Helmet>
       <div>
         <Navbar />
       </div>

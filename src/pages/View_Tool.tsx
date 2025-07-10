@@ -137,6 +137,12 @@ const View_Tool = () => {
     getTool();
   }, []);
 
+  useEffect(() => {
+    if (toolData.name) {
+      document.title = `Encore AI - ${toolData.name}`;
+    }
+  }, [toolData.name]);
+
   return (
     <div>
       <Navbar />

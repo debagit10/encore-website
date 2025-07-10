@@ -9,6 +9,7 @@ import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
 const markers = [
   { label: "Unbiased Reviews" },
@@ -32,6 +33,10 @@ const LandingPage = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Encore AI Directory - Discover the Best AI Tools</title>
+      </Helmet>
+
       <div>
         <Navbar />
       </div>
