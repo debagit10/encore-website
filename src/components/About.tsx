@@ -60,8 +60,8 @@ const About = () => {
       </div>
 
       {/* Images only shown on lg and above */}
-      <div className="hidden lg:block">
-        <div className="flex flex-col gap-[15px] ">
+      <div className="">
+        <div className="flex lg:flex-col flex-row lg:gap-[15px] gap-[5px] ">
           {tool.map((item, index) => (
             <motion.div
               key={item.id}
@@ -74,7 +74,7 @@ const About = () => {
                 delay: index * 1.5,
                 ease: "easeInOut",
               }}
-              className="p-4 cursor-pointer overflow-hidden relative"
+              className="cursor-pointer overflow-hidden relative"
             >
               <img src={item.src} alt={item.alt} />
             </motion.div>

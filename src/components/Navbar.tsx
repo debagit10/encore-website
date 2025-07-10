@@ -30,7 +30,7 @@ const Navbar = () => {
           <ul className="flex gap-6">
             <li className="cursor-pointer" onClick={() => navigate("/explore")}>
               <Typography fontWeight={400} fontSize={14} color="#2B2B33">
-                A.I Directory
+                AI Directory
               </Typography>
             </li>
             <li
@@ -99,7 +99,7 @@ const Navbar = () => {
                 setMobileOpen(false);
               }}
             >
-              A.I Directory
+              AI Directory
             </li>
             <li
               className="cursor-pointer"

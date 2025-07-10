@@ -143,7 +143,7 @@ const LandingPage = () => {
         </div>
       </div>
 
-      <div className="shadow-2xl shadow-[#2B91EE29] pt-[3rem]">
+      <div className="shadow-2xl shadow-[#2B91EE29] lg:pt-[3rem]">
         <About />
       </div>
 
