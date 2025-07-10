@@ -169,6 +169,28 @@ const ExplorePage = () => {
       {/* Tabs */}
       <div className="mt-[3rem] px-4 overflow-x-auto scrollbar-hide">
         <ul className="flex gap-3 sm:gap-5 md:gap-6 lg:gap-[30px] min-w-max md:justify-center">
+          <li
+            key="all"
+            className={`py-2 px-4 whitespace-nowrap cursor-pointer rounded-[72px] transition-all duration-200 ${
+              activeTab === "all" ? "bg-[#E7F3FD]" : "bg-transparent"
+            }`}
+            onClick={() => setActiveTab("all")}
+          >
+            <Typography
+              fontWeight={700}
+              sx={{
+                fontSize: {
+                  xs: 13,
+                  sm: 15,
+                  md: 17,
+                  lg: 18,
+                },
+                color: activeTab === "all" ? "#0167C4" : "#00000A",
+              }}
+            >
+              All
+            </Typography>
+          </li>
           {categories?.map((tab) => (
             <li
               key={tab.name}
@@ -201,7 +223,7 @@ const ExplorePage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[25px]">
           {tools
             ?.filter((tool) =>
-              activeTab === "All" ? true : tool.category_id.name === activeTab
+              activeTab === "all" ? true : tool.category_id.name === activeTab
             )
             .map((tool) => (
               <div

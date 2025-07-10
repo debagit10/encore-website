@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 import api from "../utils/axiosInstance";
 import Toast from "../utils/Toast";
+import SplashScreen from "../utils/SplashScreen";
 
 interface Category {
   _id: string;
@@ -34,6 +35,7 @@ const View_Tool = () => {
   const [message, setMessage] = useState("");
   const [hoveredStar, setHoveredStar] = useState(0);
   const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
   const { id } = useParams();
 
   const [toolData, setToolData] = useState<ToolDetails>({
@@ -89,8 +91,16 @@ const View_Tool = () => {
 
     try {
       const response = await api.post(`/api/review/add`, reviewData);
+
       if (response.data.success) {
-        showToast(response.data.message, "success");
+        setOpen(true);
+
+        setTimeout(() => {
+          setMessage("");
+          setRating(0);
+          setLoading(false);
+          setOpen(false);
+        }, 3000);
       }
     } catch (error: any) {
       if (error.response.data.error) {
@@ -122,6 +132,8 @@ const View_Tool = () => {
   return (
     <div>
       <Navbar />
+
+      <SplashScreen open={open} />
 
       <Box
         sx={{
@@ -233,6 +245,7 @@ const View_Tool = () => {
           {/* Text Area */}
           <Box sx={{ px: { xs: 0, sm: 4 } }}>
             <TextField
+              value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type in your thoughts......"
               multiline
@@ -257,16 +270,25 @@ const View_Tool = () => {
           {/* Submit Button */}
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Button
-              disabled={!message || loading}
+              disabled={loading}
               onClick={submit}
               disableElevation
-              variant="contained"
+              variant="outlined"
               sx={{
                 width: { xs: "100%", sm: "70%", md: "460px" },
                 height: "56px",
                 borderRadius: "34313.73px",
-                background: "radial-gradient(circle, #2B91EE, #0167C4)",
+                color: !message || loading ? "#black" : "white",
+                borderColor:
+                  !message || loading
+                    ? "#ccc"
+                    : "radial-gradient(circle, #2B91EE, #0167C4)",
+                background:
+                  !message || loading
+                    ? "#ccc"
+                    : "radial-gradient(circle, #2B91EE, #0167C4)",
                 textTransform: "capitalize",
+                cursor: !message || loading ? "not-allowed" : "pointer",
               }}
             >
               {loading ? "Submitting..." : "Submit"}
