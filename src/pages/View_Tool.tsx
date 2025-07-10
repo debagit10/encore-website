@@ -158,7 +158,7 @@ const View_Tool = () => {
             }}
           >
             <img
-              src={toolDatAImage}
+              src={toolData.image}
               className="w-[49px] h-[49px]"
               alt={`Logo for ${toolData.name}`}
             />
