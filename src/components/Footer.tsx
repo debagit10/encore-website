@@ -1,10 +1,34 @@
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-} from "react-icons/fa";
+import { Tooltip } from "@mui/material";
+import { FaFacebookF, FaTiktok, FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+
 import { useNavigate } from "react-router-dom";
+
+const socials = [
+  {
+    icon: FaFacebookF,
+    link: "https://www.facebook.com/profile.php?id=61577730762988&mibextid=ZbWKwL",
+    name: "Facebook",
+  },
+
+  {
+    icon: FaInstagram,
+    link: "https://www.instagram.com/techistryintegrated?igsh=MWR1bHJqd2pta29tYg==",
+    name: "Instagram",
+  },
+
+  {
+    icon: FaTiktok,
+    link: "https://www.tiktok.com/@techistryintegrated?_t=ZM-8y3H2pHRWvI&_r=1",
+    name: "TikTok",
+  },
+
+  {
+    icon: FaXTwitter,
+    link: "https://x.com/techistryi?t=0Kpz5WuqfHU-Us3v0SXOLQ&s=08",
+    name: "X (Twitter)",
+  },
+];
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -33,14 +57,22 @@ const Footer = () => {
           </p>
 
           <div className="flex flex-wrap gap-3 mt-5">
-            {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn].map(
-              (Icon, i) => (
-                <Icon
-                  key={i}
-                  className="bg-white text-black hover:text-gray-500 transition rounded-full w-8 h-8 p-2 cursor-pointer"
-                />
-              )
-            )}
+            {socials.map((social, index) => {
+              const Icon = social.icon;
+              return (
+                <Tooltip title={social.name} key={index}>
+                  <a
+                    key={index}
+                    href={social.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/80 hover:text-white transition-colors"
+                  >
+                    <Icon className="w-6 h-6" />
+                  </a>
+                </Tooltip>
+              );
+            })}
           </div>
         </div>
 

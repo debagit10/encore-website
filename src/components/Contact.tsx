@@ -5,7 +5,7 @@ const Contact = () => {
   const [message, setMessage] = useState("");
 
   const handleSendMail = () => {
-    const email = "debacodes@gmail.com";
+    const email = "encoreai2025@gmail.com";
     const subject = encodeURIComponent("Feedback or Comment");
     const body = encodeURIComponent(message);
 
@@ -41,7 +41,7 @@ const Contact = () => {
         <div className="flex flex-col gap-4">
           <div className="flex gap-3 items-center">
             <img src="/phone.png" alt="Phone" className="w-6 h-6" />
-            <a href="tel:+2347034504663">
+            <a href="tel:+2348053950341">
               <p className="text-[20px] sm:text-[24px] font-bold bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] bg-clip-text text-transparent">
                 +234 70 3450 4663
               </p>
@@ -50,9 +50,9 @@ const Contact = () => {
 
           <div className="flex gap-3 items-center">
             <img src="/mail.png" alt="Email" className="w-6 h-6" />
-            <a href="mailto:info@encoredirectories.org" target="_blank">
+            <a href="mailto:encoreai2025@gmail.com" target="_blank">
               <p className="text-[20px] sm:text-[24px] font-bold bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] bg-clip-text text-transparent">
-                info@encoredirectories.org
+                encoreai2025@gmail.com
               </p>
             </a>
           </div>

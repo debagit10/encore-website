@@ -28,13 +28,18 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
           <ul className="flex gap-6">
-            <li className="cursor-pointer" onClick={() => navigate("/explore")}>
+            <li
+              className="relative group cursor-pointer"
+              onClick={() => navigate("/explore")}
+            >
               <Typography fontWeight={400} fontSize={14} color="#2B2B33">
                 AI Directory
               </Typography>
+
+              <span className="absolute -bottom-[5px] left-1/2 w-0 h-[2px] bg-blue-500 transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2"></span>
             </li>
             <li
-              className="cursor-pointer"
+              className="relative cursor-pointer group"
               onClick={() => {
                 navigate("/", { state: { scrollTo: "about" } });
                 setMobileOpen(false);
@@ -43,9 +48,11 @@ const Navbar = () => {
               <Typography fontWeight={400} fontSize={14} color="#2B2B33">
                 About Us
               </Typography>
+
+              <span className="absolute -bottom-[5px] left-1/2 w-0 h-[2px] bg-blue-500 transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2"></span>
             </li>
             <li
-              className="cursor-pointer"
+              className="relative group cursor-pointer"
               onClick={() => {
                 navigate("/", { state: { scrollTo: "contact" } });
                 setMobileOpen(false);
@@ -54,6 +61,8 @@ const Navbar = () => {
               <Typography fontWeight={400} fontSize={14} color="#2B2B33">
                 Contact Us
               </Typography>
+
+              <span className="absolute -bottom-[5px] left-1/2 w-0 h-[2px] bg-blue-500 transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2"></span>
             </li>
           </ul>
         </div>
