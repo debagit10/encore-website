@@ -43,7 +43,7 @@ const Contact = () => {
             <img src="/phone.png" alt="Phone" className="w-6 h-6" />
             <a href="tel:+2348053950341">
               <p className="text-[20px] sm:text-[24px] font-bold bg-[radial-gradient(circle_at_center,_#2B91EE,_#0167C4)] bg-clip-text text-transparent">
-                +234 70 3450 4663
+                +234 80 5395 0341
               </p>
             </a>
           </div>
