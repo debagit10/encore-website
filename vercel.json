@@ -1,4 +1,10 @@
 {
+  "routes": [
+    {
+      "src": "/(.*)\\.(zip|war|tar\\.bz2|tgz|sql|bak|gz|old)",
+      "status": 404
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ],
@@ -18,4 +24,3 @@
     }
   ]
 }
-
