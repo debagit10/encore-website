@@ -1,12 +1,16 @@
 {
-  "routes": [
+  "redirects": [
     {
-      "src": "/(.*)\\.(zip|war|tar\\.bz2|tgz|sql|bak|gz|old)",
-      "status": 404
+      "source": "/(.*)\\.(zip|war|tar\\.bz2|tgz|sql|bak|gz|old)",
+      "destination": "/404",
+      "statusCode": 404
     }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
   ],
   "headers": [
     {
@@ -24,3 +28,4 @@
     }
   ]
 }
+
