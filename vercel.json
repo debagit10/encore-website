@@ -1,9 +1,25 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "redirects": [
+    {
+      "source": "/(.*)\\.(zip|war|tar\\.bz2|tgz|sql|bak|gz|old)",
+      "destination": "/404",
+      "statusCode": 404
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://encore-website.vercel.app"
+        },
         {
           "key": "X-Frame-Options",
           "value": "DENY"
