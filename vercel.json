@@ -1,11 +1,10 @@
 {
-  "routes": [
-    {
-      "src": "/(.*)\\.(zip|war|tar\\.bz2|tgz|sql|bak|gz|old)$",
-      "status": 404
-    }
-  ],
   "rewrites": [
+    {
+      "source": "/(.*)\\.(zip|war|tar\\.bz2|tgz|sql|bak|gz|old|db|env|php|log|cfg|conf|ini)$",
+      "destination": "/404",
+      "statusCode": 404
+    },
     {
       "source": "/(.*)",
       "destination": "/"
