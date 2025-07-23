@@ -45,15 +45,12 @@ api.interceptors.response.use(
         const newAccessToken = res.data.accessToken;
         localStorage.setItem("accessToken", newAccessToken);
 
-        // Update the Authorization header and retry the original request
         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
         return api(originalRequest);
       } catch (refreshError) {
-        // If refresh fails, redirect to login or handle logout
         console.error("Refresh token failed", refreshError);
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-        // e.g., redirect to login page
+        // localStorage.removeItem("access_token");
+        // localStorage.removeItem("refresh_token");
       }
     }
 
