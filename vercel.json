@@ -1,10 +1,12 @@
 {
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/(.*)\\.(zip|war|tar\\.bz2|tgz|sql|bak|gz|old|db|env|php|log|cfg|conf|ini)$",
-      "destination": "/404",
+      "source": "/(.*)\\.(db|sql|env|bak|log|php|cfg|conf|ini|zip|tar\\.bz2|tgz|gz|old|war)",
+      "destination": "/_notfound",  // doesn't exist on purpose
       "statusCode": 404
-    },
+    }
+  ],
+  "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/"
@@ -30,3 +32,4 @@
     }
   ]
 }
+
