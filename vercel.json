@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/(.*)\\.(db|sql|env|bak|log|php|cfg|conf|ini|zip|tar\\.bz2|tgz|gz|old|war)",
-      "destination": "/_notfound",  // doesn't exist on purpose
+      "destination": "/_notfound", 
       "statusCode": 404
     }
   ],
